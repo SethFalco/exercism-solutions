@@ -1,0 +1,51 @@
+"""Solution to Ellen's Alien Game exercise."""
+
+
+from typing import Self
+
+
+class Alien:
+    """
+    Create an Alien object with location x_coordinate and y_coordinate.
+
+    Attributes
+    ----------
+    (class)total_aliens_created: int
+    x_coordinate: int - Position on the x-axis.
+    y_coordinate: int - Position on the y-axis.
+    health: int - Amount of health points.
+
+    Methods
+    -------
+    hit(): Decrement Alien health by one point.
+    is_alive(): Return a boolean for if Alien is alive (if health is > 0).
+    teleport(new_x_coordinate, new_y_coordinate): Move Alien object to new coordinates.
+    collision_detection(other): Implementation TBD.
+    """
+
+    total_aliens_created = 0
+
+    def __init__(self, x: int, y: int):
+        self.health = 3
+        self.x_coordinate = x
+        self.y_coordinate = y
+
+        Alien.total_aliens_created += 1
+
+    def hit(self):
+        if self.health > 0:
+            self.health -= 1
+
+    def is_alive(self) -> bool:
+        return self.health != 0
+
+    def teleport(self, x: int, y: int):
+        self.x_coordinate = x
+        self.y_coordinate = y
+
+    def collision_detection(self, alien: Self):
+        pass
+
+
+def new_aliens_collection(locs: list[tuple[int, int]]) -> list[Alien]:
+    return list(map(lambda loc: Alien(*loc), locs))
