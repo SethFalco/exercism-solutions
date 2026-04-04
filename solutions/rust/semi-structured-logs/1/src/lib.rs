@@ -1,0 +1,26 @@
+/// various log levels
+#[derive(Clone, PartialEq, Eq, Debug)]
+pub enum LogLevel {
+    Info,
+    Warning,
+    Error,
+}
+
+/// primary function for emitting logs
+pub fn log(level: LogLevel, message: &str) -> String {
+    match level {
+        LogLevel::Info => info(message),
+        LogLevel::Warning => warn(message),
+        LogLevel::Error => error(message),
+    }
+}
+
+pub fn info(message: &str) -> String {
+    format!("[INFO]: {}", message)
+}
+pub fn warn(message: &str) -> String {
+    format!("[WARN]: {}", message)
+}
+pub fn error(message: &str) -> String {
+    format!("[ERROR]: {}", message)
+}
