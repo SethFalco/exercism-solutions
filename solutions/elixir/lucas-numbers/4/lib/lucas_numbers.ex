@@ -1,0 +1,15 @@
+defmodule LucasNumbers do
+  def generate(count) when not is_integer(count) or count < 1 do
+    raise ArgumentError, "count must be specified as an integer >= 1"
+  end
+
+  def generate(1), do: [2]
+  def generate(2), do: [2, 1]
+
+  @spec generate(pos_integer()) :: [pos_integer()]
+  def generate(count) do
+    Stream.iterate({2, 1}, fn {x, y} -> {y, x + y} end)
+    |> Enum.take(count)
+    |> Enum.map(fn {x, _} -> x end)
+  end
+end
